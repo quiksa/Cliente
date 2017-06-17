@@ -1,9 +1,6 @@
 package com.example.guilherme.cliente;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -11,8 +8,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-
-import static android.R.attr.duration;
 
 /**
  * Created by guilherme on 11/06/17.
@@ -22,7 +17,7 @@ public class TCPClient {
 
         private String serverMessage;
         public static String SERVERIP = ""; //your computer IP address
-        public static int SERVERPORT = 0;
+        public static int SERVERPORT = 0; // porta default
         private OnMessageReceived mMessageListener = null;
         private boolean mRun = false;
 

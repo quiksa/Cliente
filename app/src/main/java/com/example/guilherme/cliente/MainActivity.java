@@ -1,6 +1,5 @@
 package com.example.guilherme.cliente;
 
-import java.util.ArrayList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,21 +8,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import static com.example.guilherme.cliente.R.id.welcomemsg;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView textResponse;
     EditText editTextAddress, editTextPort;
     Button buttonConnect, buttonClear, consultar;
-    EditText welcomeMsg;
-
-
-     TCPClient mTcpClient;
+    EditText msgSend;
+    TCPClient mTcpClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
         buttonConnect = (Button) findViewById(R.id.connect);
         buttonClear = (Button) findViewById(R.id.clear);
         textResponse = (TextView) findViewById(R.id.response);
-        welcomeMsg = (EditText) findViewById(welcomemsg);
+        msgSend = (EditText) findViewById(R.id.msgSend);
         consultar = (Button) findViewById(R.id.consultar);
 
         editTextAddress.setText("192.168.31.168");
         editTextPort.setText("1234");
-        welcomeMsg.setText("/autores");
+        msgSend.setText("/autores");
 
         buttonConnect.setOnClickListener(new View.OnClickListener() {
 
@@ -54,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         buttonClear.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                welcomeMsg.setText("");
+                msgSend.setText("");
             }
         });
 
         consultar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = welcomeMsg.getText().toString();
+                String message = msgSend.getText().toString();
 
                 //sends the message to the server
                 if (mTcpClient != null) {
@@ -96,13 +89,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-
-            //in the arrayList we add the messaged received from server
-            Log.e(values[0],"teste");
+            //seta retorno do servidor na tela
             textResponse.setText(values[0]);
-            // notify the adapter that the data set has changed. This means that new message received
-            // from server was added to the list
-            //mAdapter.notifyDataSetChanged();
         }
     }
 
